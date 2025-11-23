@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .examination-img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+    }
+    .no-preview {
+        height: 250px;
+    }
+
+    /* View button styles */
+    .view-btn {
+        border: 1px solid #964734;
+        color: #964734
+    }
+
+    .view-btn:hover {
+        background-color: #964734;
+        color: white;
+    }
+
+    /* Download button styles */
+    .download-btn {
+        background-color: #964734;
+        color: white;
+    }
+
+    .download-btn:hover {
+        background-color:rgb(150, 104, 52);
+        color: white;
+    }
+</style>
+
+<section class="py-4">
+    <div class="container">
+
+        <!-- Page Heading -->
+        <div class="d-flex justify-content-center mb-4">
+            <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+                <h2 class="mb-0 text-center fw-bold text-uppercase" style="color: #964734;">BS Examination</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for item in examinations %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>
+                            {% if item.shift|lower == "morning" %}
+                                <span class="badge bg-warning">{{ item.shift }}</span>
+                            {% else %}
+                                <span class="badge bg-info">{{ item.shift }}</span>
+                            {% endif %}
+                        </span>                    
+                        <small class="text-muted">Posted: {{ item.posted_date }}</small>
+                    </div>
+                    <div class="card-body text-center">
+                        {% if item.preview_image %}
+                        <img src="{{ item.preview_image.url }}" class="img-fluid examination-img" alt="Examination Preview">
+                        {% else %}
+                        <div class="bg-dark text-white d-flex justify-content-center align-items-center no-preview">
+                            No preview available
+                        </div>
+                        {% endif %}
+                        {% comment %} <h5 class="card-title">{{ item.title }}</h5> {% endcomment %}
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <a href="{{ item.file.url }}" target="_blank" rel="noopener noreferrer" class="btn view-btn">
+                            <i class="fas fa-eye"></i> View
+                        </a>
+                        <a href="{{ item.file.url }}" download class="btn download-btn">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+                        <h2 class="mb-0 text-center" style="color: #964734;">No Examinations Available</h2>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

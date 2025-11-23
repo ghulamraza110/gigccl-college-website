@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .custom-btn {
+        background-color: white;
+        border: 2px solid #964734;
+    }
+    .administration_detail img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+        float: none !important;
+    }
+    .administration_detail table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    .administration_detail th,
+    .administration_detail td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        word-break: break-word;
+        min-width: 100px;
+    }
+    .custom-btn:hover {
+        background-color: #7d392a;
+        color: white;
+    }
+</style>
+
+<section class="container my-5" data-aos="fade-up" data-aos-duration="1000">
+    <div class="card shadow-lg p-4 administration_detail">
+        {{ administration.administration_detail|safe }}
+    </div>
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'administrations' %}" class="btn custom-btn">Back to Administrations</a>
+    </div>
+</section>
+
+{% endblock %}

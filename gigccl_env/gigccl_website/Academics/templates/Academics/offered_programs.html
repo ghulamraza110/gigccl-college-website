@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .btn-outline-custom {
+        border: 1px solid #964734;
+        color: white;
+        background-color: #964734;
+        transition: all 0.3s ease;
+    }
+
+    .btn-outline-custom:hover {
+        background-color: rgb(150, 111, 52);
+        color: #ffffff;
+    }
+
+    .bg-gray-custom {
+        /* background-color: rgb(211, 208, 208);  */
+        background-color: #964734;
+        color: white;
+
+    }
+</style>
+
+<section class="my-5">
+    <div class="container">
+        <div class="d-flex justify-content-center mb-4">
+            <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+                <h2 class="mb-0 text-center fw-bold text-uppercase" style="color: #964734;">Offered Programs</h2>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs mb-3" id="programTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="intermediate-tab" data-bs-toggle="tab" data-bs-target="#intermediate" type="button" role="tab">
+                    Intermediate Programs
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="bs-tab" data-bs-toggle="tab" data-bs-target="#bs" type="button" role="tab">
+                    BS Programs
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="programTabsContent">
+            <!-- Intermediate Programs -->
+            <div class="tab-pane fade show active" id="intermediate" role="tabpanel">
+                <div class="row">
+                    {% for program in intermediate_programs %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100 border-0 shadow-sm" data-aos="zoom-in" data-aos-duration="500">
+                            <div class="bg-gray-custom p-2 rounded-top">
+                                <h5 class="card-title mb-0">{{ program.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    {% if program.shift == 'Morning' or program.shift == 'Both' %}
+                                    <span class="badge bg-warning text-dark">Morning Shift</span>
+                                    {% endif %}
+                                    {% if program.shift == 'Evening' or program.shift == 'Both' %}
+                                    <span class="badge bg-purple text-light" style="background-color:#6f42c1;">Evening Shift</span>
+                                    {% endif %}
+                                </div>
+                                <p><i class="fas fa-users me-1"></i><strong>Total Seats:</strong> {{ program.total_seats }}</p>
+                                <p>
+                                        <strong>Roadmap:</strong>
+                                        <a href="{{ program.roadmap.url }}" download title="Download Roadmap">
+                                        <i class="fas fa-download fa-lg text-dark ms-2"></i>
+                                        </a>
+                                </p>
+                                <a href="#" class="btn btn-outline-custom w-100">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+                            <h2 class="mb-0 text-center" style="color: #964734;">No Intermediate programs available.</h2>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- BS Programs -->
+            <div class="tab-pane fade" id="bs" role="tabpanel">
+                <div class="row">
+                    {% for program in bs_programs %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="bg-gray-custom p-2 rounded-top">
+                                <h5 class="card-title mb-0">{{ program.name }}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    {% if program.shift == 'Morning' or program.shift == 'Both' %}
+                                    <span class="badge bg-warning text-dark">Morning Shift</span>
+                                    {% endif %}
+                                    {% if program.shift == 'Evening' or program.shift == 'Both' %}
+                                    <span class="badge bg-purple text-light" style="background-color:#6f42c1;">Evening Shift</span>
+                                    {% endif %}
+                                </div>
+                                <p><i class="fas fa-users me-1"></i><strong>Total Seats:</strong> {{ program.total_seats }}</p>
+                                <p>
+                                        <strong>Roadmap:</strong>
+                                        <a href="{{ program.roadmap.url }}" download title="Download Roadmap">
+                                        <i class="fas fa-download fa-lg text-dark ms-2"></i>
+                                        </a>
+                                </p>
+                                <a href="#" class="btn btn-outline-custom w-100">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="d-flex justify-content-center mb-4">
+                        <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+                            <h2 class="mb-0 text-center" style="color: #964734;">No BS programs available.</h2>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

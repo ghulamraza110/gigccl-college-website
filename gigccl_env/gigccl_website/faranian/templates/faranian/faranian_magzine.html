@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .btn-outline-primary {
+    border-color: #964734;
+    color: #964734;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #964734;
+    border: none;
+    color: white;
+  }
+
+  .btn-primary {
+    background-color: #964734;
+    border-color: #964734;
+  }
+
+  .btn-primary:hover {
+    background-color: white;
+    border-color: #80372b;
+    color: #964734;
+  }
+</style>
+
+<div class="container py-5">
+  <div class="d-flex justify-content-center mb-4">
+    <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+        <h2 class="mb-0 text-center fw-bold text-uppercase" style="color: #964734;">Faranian College Magazines</h2>
+    </div>
+  </div>
+  
+  <div class="row gy-4">
+
+    {% for mag in magazines %}
+    <div class="col-12 col-md-6">
+      <div class="card h-100 shadow-sm">
+        <div class="row g-0 h-100">
+          <!-- Fixed-height Image Column -->
+          <div class="col-4 d-flex align-items-stretch">
+            <div class="w-100">
+              <img src="{{ mag.cover_image.url }}" alt="{{ mag.title }} cover"
+                   class="img-fluid h-100 w-100 object-fit-cover rounded-start">
+            </div>
+          </div>
+          
+          <!-- Content Column -->
+          <div class="col-8 d-flex flex-column">
+            <div class="card-body d-flex flex-column h-100">
+              <h5 class="card-title mb-1">
+                {{ mag.title }}
+              </h5>
+              <small class="text-muted pt-2">Posted: {{ mag.posted_date }}</small>
+              <p class="card-text mt-2">{{ mag.description|safe }}</p>
+
+              <!-- Bottom-aligned buttons -->
+              <div class="mt-auto">
+                <a href="{{ mag.magzine.url }}" class="btn btn-outline-primary btn-sm w-100 mb-2" target="_blank">
+                  <i class="fas fa-book-open"></i> View Magazine
+                </a>
+                <a href="{{ mag.magzine.url }}" class="btn btn-primary btn-sm w-100" download>
+                  <i class="fas fa-download"></i> Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+                <div class="d-flex justify-content-center mb-4">
+                    <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+                        <h2 class="mb-0 text-center" style="color: #964734;">No Magzine Available</h2>
+                    </div>
+                </div>
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}

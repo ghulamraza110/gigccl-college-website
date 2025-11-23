@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .notice-board-heading {
+        color: #964734;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
+    }
+    .notice-board-heading-card {
+        display: inline-block;
+        padding: 10px 20px;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+    }
+    .view-btn {
+        border: 1px solid #964734;
+        color: #964734;
+        background-color: transparent;
+        padding: 5px 15px;
+        border-radius: 8px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .view-btn:hover {
+        background-color: #964734;
+        color: white;
+    }
+    .download-btn {
+        background-color: #964734;
+        color: white;
+        border: 1px solid #964734;
+        padding: 5px 15px;
+        border-radius: 8px;
+        margin-left: 8px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .download-btn:hover {
+        background-color: white;
+        border: 1px solid #964734;
+        color: #964734;
+    }
+</style>
+
+<section class="notice-board-section py-4">
+    <div class="container">
+        <!-- Heading -->
+        <div class="m-4 d-flex justify-content-center">
+            <div class="notice-board-heading-card">
+                <h2 class="notice-board-heading">Notice Board</h2>
+            </div>
+        </div>
+
+        {% for notice in notices %}
+        <div class="card mb-3 border shadow-sm rounded-3" style="max-width: 100%; min-height: 150px;">
+            <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                <!-- Left Content -->
+                <div class="mb-2 mb-md-0">
+                    <h5 class="card-title mb-1" style="color: #964734;">{{ notice.title }}</h5>
+                    <small class="text-muted">Posted on: {{ notice.posted_date }}</small>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex mt-2 mt-md-0">
+                    <a href="{{ notice.file.url }}" target="_blank" class="btn view-btn">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                    <a href="{{ notice.file.url }}" download class="btn download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="d-flex justify-content-center mb-4">
+            <div class="card border-0 shadow-sm px-4 py-2" style="background-color: #f8f9fa; width: fit-content;">
+                <h2 class="mb-0 text-center" style="color: #964734;">No Notice Available</h2>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}  
+{% block content %}
+
+<style>
+    .curricular_activity-detail-card {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* .curricular_activity-title {
+        font-weight: bold;
+        text-transform: capitalize;
+        text-align: justify;
+    }  */
+
+    .curricular_activity-description {
+        text-align: justify;
+    }
+    .curricular_activity-description img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+        float: none !important;
+    }
+    .curricular_activity-description table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    .curricular_activity-description th,
+    .curricular_activity-description td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        word-break: break-word;
+        min-width: 100px;
+    }
+    .back-btn {
+        border: 1px solid #964734;
+        color: #964734;
+        padding: 8px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .back-btn:hover {
+        background-color: #964734;
+        color: white;
+    }
+</style>
+
+<div class="container my-4">
+    <div class="card curricular_activity-detail-card">
+        <img src="{{ curricular_activity.image.url }}" class="card-img-top" alt="{{ curricular_activity.title }}">
+        <div class="card-body">
+            {% comment %} <h2 class="curricular_activity-title">{{ curricular_activity.title }}</h2> {% endcomment %}
+            <p class="text-muted">Posted on: {{ curricular_activity.posted_date }}</p>
+            <div class="curricular_activity-description" data-aos="zoom-in" data-aos-duration="500">
+                {{ curricular_activity.description|safe }}
+            </div>
+        </div>
+    </div>
+    <!-- Back to Curicular_Activities Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'curricular_activity_list' %}" class="btn back-btn">Back to Curricular Activities</a>
+    </div>
+</div>
+
+{% endblock %}

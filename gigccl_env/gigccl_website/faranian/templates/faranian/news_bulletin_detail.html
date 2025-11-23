@@ -1,0 +1,73 @@
+{% extends 'base.html' %}  
+{% block content %}
+
+<style>
+    .news-bulletin-detail-card {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* .news-bulletin-title {
+        font-weight: bold;
+        text-transform: capitalize;
+        text-align: justify;
+    } */
+
+    .news-bulletin-description {
+        text-align: justify;
+    }
+    .news-bulletin-description img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+        float: none !important;
+    }
+    .news-bulletin-description table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    .news-bulletin-description th,
+    .news-bulletin-description td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        word-break: break-word;
+        min-width: 100px;
+    }
+    .back-btn {
+        border: 1px solid #964734;
+        color: #964734;
+        padding: 8px 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .back-btn:hover {
+        background-color: #964734;
+        color: white;
+    }
+</style>
+
+<div class="container my-4">
+    <div class="card news-bulletin-detail-card">
+        <img src="{{ news_bulletin.image.url }}" class="card-img-top" alt="{{ news_bulletin.title }}">
+        <div class="card-body">
+            {% comment %} <h2 class="news-bulletin-title">{{ news_bulletin.title }}</h2> {% endcomment %}
+            <p class="text-muted">Posted on: {{ news_bulletin.posted_date }}</p>
+            <div class="news-bulletin-description" data-aos="zoom-in" data-aos-duration="500">
+                {{ news_bulletin.description|safe }}
+            </div>
+        </div>
+    </div>
+    <!-- Back to News-Bulletin Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'news_bulletin_list' %}" class="btn back-btn">Back to News Bulletin</a>
+    </div>
+</div>
+
+{% endblock %}

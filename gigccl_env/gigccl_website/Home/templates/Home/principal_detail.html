@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .custom-btn {
+        background-color: white;
+        border: 2px solid #964734;
+    }
+
+    .custom-btn:hover {
+        background-color: #7d392a;
+        color: white;
+    }
+    .principal-detail img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+        float: none !important;
+    }
+    .principal-detail table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
+    .principal-detail th,
+    .principal-detail td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        word-break: break-word;
+        min-width: 100px;
+    }
+</style>
+
+<section class="container my-5" data-aos="fade-up" data-aos-duration="1000">
+    <div class="card shadow-lg p-4 principal-detail">
+        {{ principal_message.full_message|safe }}
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'home' %}" class="btn custom-btn">Back to Home</a>
+    </div>
+</section>
+
+{% endblock %}
