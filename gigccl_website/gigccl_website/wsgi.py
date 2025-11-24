@@ -8,9 +8,14 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
-from django.core.wsgi import get_wsgi_application
+path = '/home/graza110/gigccl-college-website'
+if path not in sys.path:
+    sys.path.insert(0, path)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gigccl_website.settings')
 
+from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
+
